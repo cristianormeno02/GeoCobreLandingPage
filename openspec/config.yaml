@@ -1,32 +1,37 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Proyecto: sitio institucional (landing page) de GeoCobre, micro-empresa de consultoría geológica.
+  Servicios: asesoría integral en exploración minera basada en investigación aplicada; campo (logueo y
+  asesoramiento en terreno) y laboratorio (análisis macroscópico y microscópico de muestras de roca).
+  Enfoque: muestreo, análisis e interpretación de resultados según aspectos genéticos de los depósitos,
+  para reducir riesgo financiero e impacto ambiental. Madurez TRL 5, validado en el proyecto Morro del Cobre.
+  Líneas futuras: cursos de capacitación y alianzas con laboratorios, gobierno, mineras y universidades.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Stack: Astro (SSG) + TypeScript estricto + Tailwind CSS v4 (@theme en CSS) + Vitest + Playwright + axe.
+  Formularios: Web3Forms. Hosting: Netlify.
+  Idiomas: es (defecto, ruta /), en (/en/), pt (/pt/, portugués de Brasil), fr (/fr/).
+  Artefactos OpenSpec redactados en español; código e identificadores en inglés; commits convencionales.
+  Accesibilidad objetivo: WCAG 2.1 AA. Rendimiento objetivo: Lighthouse móvil >= 90.
 
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+  Glosario técnico (es → en / pt / fr) — BORRADOR, pendiente de revisión por especialista:
+    logueo de sondajes → drill core logging / descrição de testemunhos / description de carottes
+    muestreo → sampling / amostragem / échantillonnage
+    petrografía → petrography / petrografia / pétrographie
+    calcografía (microscopía de luz reflejada) → ore microscopy (reflected light) / calcografia / métallographie (microscopie en lumière réfléchie)
+    lámina delgada → thin section / lâmina delgada / lame mince
+    depósito mineral → ore deposit / depósito mineral / gisement
+    exploración minera → mineral exploration / exploração mineral / exploration minière
+
+rules:
+  proposal:
+    - Incluir siempre una sección "Acceptance Criteria" con criterios medibles
+    - No afirmar clientes, alianzas, cursos ni resultados no confirmados por GeoCobre
+  specs:
+    - Cada escenario THEN debe ser observable y verificable por una prueba automatizada
+    - Todo texto visible debe considerar los cuatro idiomas
+  design:
+    - Incluir estrategia de pruebas y una sección "Open Questions" con los TODO pendientes
+  tasks:
+    - Seguir TDD, con el test rojo antes de la implementación en cada tarea de código
+    - Terminar con tareas de verificación contra los criterios de aceptación
