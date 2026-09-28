@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+bin/
+obj/
+
+# Build outputs
+dist/
+build/
+out/
+
+# Environment and secrets
+.env
+.env.local
+*.local
+
+# System & IDE
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Temp files
+*.tmp
+*.bak
