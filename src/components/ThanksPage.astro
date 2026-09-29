@@ -1,0 +1,22 @@
+---
+import { type Locale, getLocalizedPath, t } from '../i18n/utils';
+import SubPage from './SubPage.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const { thanks } = t(lang);
+---
+
+<SubPage lang={lang} route="thanks" title={thanks.title} noindex>
+  <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{thanks.title}</h1>
+  <p class="mt-4 text-lg text-slate-700">{thanks.text}</p>
+  <a
+    href={getLocalizedPath(lang, 'home')}
+    class="mt-10 inline-flex min-h-11 items-center rounded-md bg-copper-700 px-5 font-semibold text-white hover:bg-slate-950"
+  >
+    {thanks.back}
+  </a>
+</SubPage>

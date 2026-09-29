@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Paleta GeoCobre. Ver design.md: copper-600 no se usa para texto normal sobre fondo claro. */
+  --color-copper-400: #e08a5c;
+  --color-copper-600: #c86432;
+  --color-copper-700: #a04f26;
+  --color-slate-950: #0f172a;
+  --color-mineral-50: #f8fafc;
+  --color-quartz-200: #e2e8f0;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Compensa el encabezado sticky al navegar por anclas. */
+    scroll-padding-top: 5rem;
+
+    @media (width >= 48rem) {
+      /* Encabezado de dos filas en tablet y escritorio. */
+      scroll-padding-top: 8rem;
+    }
+  }
+
+  body {
+    @apply bg-white font-sans text-slate-950 antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-copper-700;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

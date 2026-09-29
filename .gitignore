@@ -22,3 +22,9 @@ desktop.ini
 # Temp files
 *.tmp
 *.bak
+
+# Astro / tests
+.astro/
+test-results/
+playwright-report/
+.claude/

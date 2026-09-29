@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { type Locale, type RouteKey, getLocalizedPath, t } from '../i18n/utils';
+import Footer from './Footer.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Logo from './Logo.astro';
+import SkipLink from './SkipLink.astro';
+
+interface Props {
+  lang: Locale;
+  route: RouteKey;
+  title: string;
+  noindex?: boolean;
+}
+
+const { lang, route, title, noindex = false } = Astro.props;
+const dict = t(lang);
+---
+
+<Layout lang={lang} route={route} title={title} noindex={noindex}>
+  <SkipLink lang={lang} />
+  <header class="border-b border-quartz-200 bg-white">
+    <div class="mx-auto flex min-h-16 max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-2 sm:px-6">
+      <a href={getLocalizedPath(lang, 'home')} class="rounded-md" aria-label={`GeoCobre — ${dict.nav.home}`}>
+        <Logo />
+      </a>
+      <LanguageSwitcher lang={lang} route={route} />
+    </div>
+  </header>
+  <main id="contenido" tabindex="-1" class="mx-auto min-h-[60vh] max-w-3xl px-4 py-16 sm:px-6">
+    <slot />
+  </main>
+  <Footer lang={lang} route={route} />
+</Layout>

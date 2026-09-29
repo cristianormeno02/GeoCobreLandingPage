@@ -1,0 +1,56 @@
+---
+import { type Locale, t } from '../i18n/utils';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const CURRENT_TRL = 5;
+
+const { lang } = Astro.props;
+const { validation } = t(lang);
+---
+
+<section id="validacion" class="bg-slate-950 text-white">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-24">
+    <SectionHeader title={validation.title} intro={validation.intro} inverted />
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-5">
+      <article class="rounded-xl border border-copper-400/40 bg-white/5 p-6 md:p-8 lg:col-span-2">
+        <p class="text-sm font-semibold tracking-wide text-copper-400 uppercase">{validation.caseLabel}</p>
+        <h3 class="mt-2 text-2xl font-bold">{validation.caseTitle}</h3>
+        <p class="mt-4 leading-relaxed text-quartz-200">{validation.caseText}</p>
+      </article>
+
+      <div class="lg:col-span-3">
+        <h3 class="text-xl font-semibold">{validation.trlTitle}</h3>
+        <ol class="mt-6 grid gap-2" data-trl-scale>
+          {
+            validation.trlLevels.map((label, index) => {
+              const level = index + 1;
+              const current = level === CURRENT_TRL;
+              return (
+                <li
+                  aria-current={current ? 'step' : undefined}
+                  class:list={[
+                    'flex items-center gap-4 rounded-lg px-4 py-2',
+                    current ? 'bg-copper-400 text-slate-950' : level < CURRENT_TRL ? 'bg-white/10 text-quartz-200' : 'bg-white/5 text-quartz-200',
+                  ]}
+                >
+                  <span class="w-16 shrink-0 text-sm font-semibold">
+                    <span class="sr-only">{validation.trlLevel} </span>
+                    <span aria-hidden="true">TRL </span>
+                    {level}
+                  </span>
+                  <span class:list={['text-sm', current && 'font-semibold']}>{label}</span>
+                  {current && <span class="ml-auto hidden text-xs font-bold uppercase sm:inline">{validation.trlCurrent}</span>}
+                </li>
+              );
+            })
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

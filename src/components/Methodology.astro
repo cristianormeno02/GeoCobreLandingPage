@@ -1,0 +1,53 @@
+---
+import { type Locale, t } from '../i18n/utils';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const { methodology } = t(lang);
+const steps = [methodology.steps.sampling, methodology.steps.analysis, methodology.steps.interpretation];
+const benefits = [methodology.benefits.financial, methodology.benefits.environmental];
+---
+
+<section id="metodologia" class="bg-white">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-24">
+    <SectionHeader title={methodology.title} intro={methodology.intro} />
+
+    <ol class="mt-12 grid gap-6 md:grid-cols-3">
+      {
+        steps.map((step, index) => (
+          <li class="relative rounded-xl border border-quartz-200 bg-mineral-50 p-6">
+            <span class="flex size-10 items-center justify-center rounded-full bg-slate-950 font-bold text-copper-400" aria-hidden="true">
+              {index + 1}
+            </span>
+            <h3 class="mt-4 text-xl font-semibold text-slate-950">{step.title}</h3>
+            <p class="mt-2 leading-relaxed text-slate-600">{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="mt-12">
+      <h3 class="sr-only">{methodology.benefitsTitle}</h3>
+      <ul class="grid gap-6 md:grid-cols-2">
+        {
+          benefits.map((benefit) => (
+            <li class="flex gap-4 rounded-xl bg-slate-950 p-6 text-white">
+              <svg class="mt-1 size-6 shrink-0 text-copper-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4" />
+              </svg>
+              <div>
+                <h4 class="text-lg font-semibold">{benefit.title}</h4>
+                <p class="mt-1 text-quartz-200">{benefit.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

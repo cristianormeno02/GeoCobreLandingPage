@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  intro?: string;
+  inverted?: boolean;
+}
+
+const { title, intro, inverted = false } = Astro.props;
+---
+
+<div class="max-w-3xl">
+  <span class="mb-4 block h-1 w-12 rounded-full bg-copper-600" aria-hidden="true"></span>
+  <h2 class:list={['text-3xl font-bold tracking-tight sm:text-4xl', inverted ? 'text-white' : 'text-slate-950']}>
+    {title}
+  </h2>
+  {intro && <p class:list={['mt-4 text-lg leading-relaxed', inverted ? 'text-quartz-200' : 'text-slate-600']}>{intro}</p>}
+</div>

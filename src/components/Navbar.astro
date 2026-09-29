@@ -1,0 +1,103 @@
+---
+import { SECTIONS } from '../data/sections';
+import { type Locale, getLocalizedPath, t } from '../i18n/utils';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Logo from './Logo.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const dict = t(lang);
+---
+
+<header class="sticky top-0 z-40 border-b border-quartz-200 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+    <a href={getLocalizedPath(lang, 'home')} class="rounded-md" aria-label={`GeoCobre — ${dict.nav.home}`}>
+      <Logo />
+    </a>
+
+    <div class="hidden items-center gap-4 md:flex">
+      <LanguageSwitcher lang={lang} route="home" />
+      <a
+        href="#contacto"
+        class="inline-flex min-h-11 items-center rounded-md bg-copper-700 px-4 font-semibold text-white hover:bg-slate-950"
+      >
+        {dict.nav.cta}
+      </a>
+    </div>
+
+    <button
+      type="button"
+      class="inline-flex size-11 items-center justify-center rounded-md text-slate-950 hover:bg-mineral-50 md:hidden"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      aria-label={dict.nav.menuOpen}
+      data-label-open={dict.nav.menuOpen}
+      data-label-close={dict.nav.menuClose}
+      data-menu-toggle
+    >
+      <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path data-icon-open stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"></path>
+        <path data-icon-close class="hidden" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div id="site-menu" data-open="false" class="hidden border-t border-quartz-200 data-[open=true]:block md:block">
+    <nav aria-label={dict.nav.label} class="mx-auto max-w-7xl px-4 sm:px-6">
+      <ul class="flex flex-col py-2 md:flex-row md:flex-wrap md:justify-center md:gap-x-2 md:py-1">
+        {
+          SECTIONS.map(({ id, key }) => (
+            <li>
+              <a
+                href={`#${id}`}
+                class="flex min-h-11 items-center rounded-md px-3 font-medium text-slate-700 hover:bg-mineral-50 hover:text-copper-700 md:text-sm"
+              >
+                {dict.nav.links[key]}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-quartz-200 px-4 py-3 md:hidden">
+      <LanguageSwitcher lang={lang} route="home" />
+      <a
+        href="#contacto"
+        class="inline-flex min-h-11 items-center rounded-md bg-copper-700 px-4 font-semibold text-white hover:bg-slate-950"
+      >
+        {dict.nav.cta}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('site-menu');
+
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      menu.dataset.open = String(open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? '');
+      toggle.querySelector('[data-icon-open]')?.classList.toggle('hidden', open);
+      toggle.querySelector('[data-icon-close]')?.classList.toggle('hidden', !open);
+    };
+
+    toggle.addEventListener('click', () => setOpen(menu.dataset.open !== 'true'));
+
+    menu.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a[href^="#"]')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.dataset.open === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>

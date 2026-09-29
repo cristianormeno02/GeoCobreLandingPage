@@ -1,0 +1,69 @@
+---
+import { SECTIONS } from '../data/sections';
+import { site } from '../data/site';
+import { type Locale, type RouteKey, getLocalizedPath, t } from '../i18n/utils';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Logo from './Logo.astro';
+
+interface Props {
+  lang: Locale;
+  route?: RouteKey;
+}
+
+const { lang, route = 'home' } = Astro.props;
+const dict = t(lang);
+const home = getLocalizedPath(lang, 'home');
+const year = new Date().getFullYear();
+const linkClass = 'inline-flex min-h-11 items-center text-quartz-200 hover:text-copper-400';
+---
+
+<!-- pb-24 en móvil deja espacio para el botón flotante de WhatsApp -->
+<footer class="bg-slate-950 pb-24 text-white sm:pb-0">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
+    <div class="lg:col-span-2">
+      <a href={home} class="inline-block rounded-md" aria-label={`GeoCobre — ${dict.nav.home}`}>
+        <Logo inverted />
+      </a>
+      <p class="mt-4 max-w-sm text-quartz-200">{dict.footer.tagline}</p>
+      <LanguageSwitcher lang={lang} route={route} class="mt-6" inverted />
+    </div>
+
+    <nav aria-labelledby="footer-sections">
+      <h2 id="footer-sections" class="font-semibold">{dict.footer.sectionsTitle}</h2>
+      <ul class="mt-2">
+        {
+          SECTIONS.map(({ id, key }) => (
+            <li>
+              <a href={`${home}#${id}`} class={linkClass}>
+                {dict.nav.links[key]}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="font-semibold">{dict.footer.contactTitle}</h2>
+      <ul class="mt-2">
+        <li>
+          <a href={`mailto:${site.email}`} class={linkClass}>{site.email}</a>
+        </li>
+        <li>
+          <a href={buildWhatsAppUrl(site.whatsapp, dict.whatsapp.message)} target="_blank" rel="noopener noreferrer" class={linkClass}>
+            WhatsApp
+          </a>
+        </li>
+        <li>
+          <a href={getLocalizedPath(lang, 'privacy')} class={linkClass}>{dict.footer.privacy}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <p class="mx-auto max-w-7xl px-4 py-6 text-sm text-quartz-200 sm:px-6">
+      © {year} GeoCobre. {dict.footer.rights}
+    </p>
+  </div>
+</footer>

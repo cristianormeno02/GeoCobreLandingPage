@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Locale } from '../i18n/utils';
+import Alliances from './Alliances.astro';
+import ContactForm from './ContactForm.astro';
+import Footer from './Footer.astro';
+import Hero from './Hero.astro';
+import Methodology from './Methodology.astro';
+import Navbar from './Navbar.astro';
+import Services from './Services.astro';
+import SkipLink from './SkipLink.astro';
+import Team from './Team.astro';
+import Training from './Training.astro';
+import Validation from './Validation.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<Layout lang={lang} route="home">
+  <SkipLink lang={lang} />
+  <Navbar lang={lang} />
+  <main id="contenido" tabindex="-1">
+    <Hero lang={lang} />
+    <Methodology lang={lang} />
+    <Services lang={lang} />
+    <Validation lang={lang} />
+    <Team lang={lang} />
+    <Training lang={lang} />
+    <Alliances lang={lang} />
+    <ContactForm lang={lang} />
+  </main>
+  <Footer lang={lang} />
+  <WhatsAppButton lang={lang} />
+</Layout>

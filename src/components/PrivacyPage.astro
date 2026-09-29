@@ -1,0 +1,28 @@
+---
+import { site } from '../data/site';
+import { type Locale, getLocalizedPath, t } from '../i18n/utils';
+import SubPage from './SubPage.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const { privacy } = t(lang);
+---
+
+<SubPage lang={lang} route="privacy" title={privacy.title}>
+  <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{privacy.title}</h1>
+  <!-- TODO(legal): reemplazar por el texto revisado legalmente y quitar este aviso. -->
+  <p class="mt-4 inline-block rounded-md bg-mineral-50 px-3 py-1 text-sm text-slate-600">{privacy.draftNotice}</p>
+  <div class="mt-8 space-y-4 leading-relaxed text-slate-700">
+    {privacy.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+  </div>
+  <p class="mt-8 text-slate-700">
+    {privacy.contactLabel}
+    <a href={`mailto:${site.email}`} class="font-semibold text-copper-700 underline">{site.email}</a>
+  </p>
+  <a href={getLocalizedPath(lang, 'home')} class="mt-10 inline-flex min-h-11 items-center font-semibold text-copper-700 hover:text-slate-950">
+    ← {privacy.back}
+  </a>
+</SubPage>

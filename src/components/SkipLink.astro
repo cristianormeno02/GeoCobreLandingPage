@@ -1,0 +1,16 @@
+---
+import { type Locale, t } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<a
+  href="#contenido"
+  class="sr-only z-50 rounded-md bg-slate-950 px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+>
+  {t(lang).skipLink}
+</a>

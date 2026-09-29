@@ -1,0 +1,20 @@
+---
+import type { GetStaticPaths } from 'astro';
+import PrivacyPage from '../../components/PrivacyPage.astro';
+import ThanksPage from '../../components/ThanksPage.astro';
+import { DEFAULT_LOCALE, LOCALES, type Locale, ROUTES } from '../../i18n/utils';
+
+// Páginas secundarias con slug traducido (p. ej. /en/privacy/, /fr/merci/).
+export const getStaticPaths = (() =>
+  LOCALES.filter((lang) => lang !== DEFAULT_LOCALE).flatMap((lang) =>
+    (['privacy', 'thanks'] as const).map((route) => ({
+      params: { lang, page: ROUTES[route][lang] },
+      props: { route },
+    })),
+  )) satisfies GetStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+const { route } = Astro.props;
+---
+
+{route === 'privacy' ? <PrivacyPage lang={lang} /> : <ThanksPage lang={lang} />}

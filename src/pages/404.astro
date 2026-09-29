@@ -1,0 +1,33 @@
+---
+import Logo from '../components/Logo.astro';
+import Layout from '../layouts/Layout.astro';
+import { LANGUAGE_NAMES, LOCALES, getLocalizedPath, t } from '../i18n/utils';
+
+const dict = t('es');
+---
+
+<Layout lang="es" title={dict.notFound.title} noindex>
+  <main id="contenido" class="mx-auto flex min-h-screen max-w-xl flex-col items-start justify-center gap-6 px-4">
+    <Logo />
+    <p class="text-6xl font-bold text-copper-700">404</p>
+    <h1 class="text-3xl font-bold">{dict.notFound.title}</h1>
+    <p class="text-slate-700">{dict.notFound.text}</p>
+    <a
+      href={getLocalizedPath('es', 'home')}
+      class="inline-flex min-h-11 items-center rounded-md bg-copper-700 px-5 font-semibold text-white hover:bg-slate-950"
+    >
+      {dict.notFound.back}
+    </a>
+    <ul class="flex flex-wrap gap-4 text-sm" aria-label="Idiomas">
+      {
+        LOCALES.filter((l) => l !== 'es').map((locale) => (
+          <li lang={locale}>
+            <a href={getLocalizedPath(locale, 'home')} class="text-copper-700 underline">
+              {t(locale).notFound.back} ({LANGUAGE_NAMES[locale]})
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>

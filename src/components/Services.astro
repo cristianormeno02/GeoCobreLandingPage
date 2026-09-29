@@ -1,0 +1,69 @@
+---
+import { services } from '../data/services';
+import { type Locale, t } from '../i18n/utils';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const dict = t(lang).services;
+
+const groups = [
+  { id: 'field', title: dict.fieldTitle, items: services.filter((s) => s.group === 'field') },
+  { id: 'lab', title: dict.labTitle, items: services.filter((s) => s.group === 'lab') },
+] as const;
+---
+
+<section id="servicios" class="bg-mineral-50">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-24">
+    <SectionHeader title={dict.title} intro={dict.intro} />
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-2">
+      {
+        groups.map((group) => (
+          <section aria-labelledby={`servicios-${group.id}`}>
+            <h3 id={`servicios-${group.id}`} class="flex items-center gap-3 text-2xl font-semibold text-slate-950">
+              {group.id === 'field' ? (
+                <svg class="size-7 text-copper-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m3 20 6-11 4 6 3-4 5 9H3z" />
+                  <circle cx="17" cy="5" r="2" />
+                </svg>
+              ) : (
+                <svg class="size-7 text-copper-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6M10 3v4l-1 2h6l-1-2V3M8 21h8M12 17v4M7 13a5 5 0 0 0 10 0" />
+                  <circle cx="12" cy="11" r="2" />
+                </svg>
+              )}
+              {group.title}
+            </h3>
+            <div class="mt-6 grid gap-4">
+              {group.items.map((service) => (
+                <article class="flex flex-col gap-3 rounded-xl border border-quartz-200 bg-white p-6 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <h4 class="text-lg font-semibold text-slate-950">{dict.items[service.id].title}</h4>
+                    <p class="mt-1 leading-relaxed text-slate-600">{dict.items[service.id].text}</p>
+                  </div>
+                  <a
+                    href={`?tipo=${group.id}#contacto`}
+                    aria-label={`${dict.cta}: ${dict.items[service.id].title}`}
+                    class="inline-flex min-h-11 shrink-0 items-center self-start rounded-md px-3 font-semibold text-copper-700 hover:bg-mineral-50 hover:text-slate-950"
+                  >
+                    {dict.cta}
+                    <span aria-hidden="true" class="ml-1">→</span>
+                  </a>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 rounded-xl border-l-4 border-copper-600 bg-white p-6 md:p-8">
+      <h3 class="text-xl font-semibold text-slate-950">{dict.interpretation.title}</h3>
+      <p class="mt-2 max-w-3xl leading-relaxed text-slate-600">{dict.interpretation.text}</p>
+    </div>
+  </div>
+</section>

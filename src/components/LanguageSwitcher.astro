@@ -1,0 +1,46 @@
+---
+import { LANGUAGE_NAMES, LOCALES, type Locale, type RouteKey, getLocalizedPath, t } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+  route: RouteKey;
+  class?: string;
+  inverted?: boolean;
+}
+
+const { lang, route, class: className, inverted = false } = Astro.props;
+---
+
+<nav aria-label={t(lang).nav.languageLabel} class={className}>
+  <ul class="flex flex-wrap items-center gap-1">
+    {
+      LOCALES.map((locale) => {
+        const current = locale === lang;
+        return (
+          <li>
+            <a
+              href={getLocalizedPath(locale, route)}
+              lang={locale}
+              hreflang={locale}
+              aria-current={current ? 'page' : undefined}
+              title={LANGUAGE_NAMES[locale]}
+              class:list={[
+                'inline-flex min-h-11 min-w-11 items-center justify-center rounded-md px-2 text-sm font-semibold uppercase',
+                current
+                  ? inverted
+                    ? 'bg-copper-400 text-slate-950'
+                    : 'bg-slate-950 text-white'
+                  : inverted
+                    ? 'text-quartz-200 hover:text-white'
+                    : 'text-slate-700 hover:bg-mineral-50 hover:text-copper-700',
+              ]}
+            >
+              <span aria-hidden="true">{locale}</span>
+              <span class="sr-only">{LANGUAGE_NAMES[locale]}</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

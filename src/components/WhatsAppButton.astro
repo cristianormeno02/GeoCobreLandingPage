@@ -1,0 +1,25 @@
+---
+import { site } from '../data/site';
+import { type Locale, t } from '../i18n/utils';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const { whatsapp } = t(lang);
+---
+
+<a
+  href={buildWhatsAppUrl(site.whatsapp, whatsapp.message)}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={whatsapp.label}
+  title={whatsapp.label}
+  data-whatsapp-float
+  class="fixed right-4 bottom-4 z-30 flex size-14 items-center justify-center rounded-full bg-[#25d366] text-slate-950 shadow-lg ring-2 ring-white transition-transform hover:scale-105 sm:right-6 sm:bottom-6"
+>
+  <WhatsAppIcon class="size-8" />
+</a>

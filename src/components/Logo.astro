@@ -1,0 +1,17 @@
+---
+// TODO(marca): reemplazar por el logotipo oficial en SVG.
+interface Props {
+  class?: string;
+  inverted?: boolean;
+}
+
+const { class: className, inverted = false } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center gap-2 text-xl font-bold tracking-tight', className]}>
+  <svg class="size-8 shrink-0" viewBox="0 0 32 32" aria-hidden="true">
+    <path fill={inverted ? '#1e293b' : '#0f172a'} d="M16 1 29 8.5v15L16 31 3 23.5v-15z"></path>
+    <path fill="#c86432" d="M16 7 23.8 11.5v9L16 25l-7.8-4.5v-9z"></path>
+  </svg>
+  <span class={inverted ? 'text-white' : 'text-slate-950'}>Geo<span class={inverted ? 'text-copper-400' : 'text-copper-700'}>Cobre</span></span>
+</span>
