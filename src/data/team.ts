@@ -9,17 +9,39 @@ export interface TeamMember {
   education: Localized;
 }
 
-// TODO(contenido): reemplazar por los perfiles reales del equipo antes de publicar.
+const unsjResearcher: Pick<TeamMember, 'role' | 'specialty'> = {
+  role: {
+    es: 'Docente e investigadora, Universidad Nacional de San Juan',
+    en: 'Lecturer and researcher, National University of San Juan',
+    pt: 'Docente e pesquisadora, Universidade Nacional de San Juan',
+    fr: 'Enseignante-chercheuse, Université nationale de San Juan',
+  },
+  specialty: {
+    es: 'Pórfidos cupríferos',
+    en: 'Porphyry copper deposits',
+    pt: 'Pórfiros cupríferos',
+    fr: 'Porphyres cuprifères',
+  },
+};
+
+const phdGeology: Localized = {
+  es: 'Dra. en Ciencias Geológicas',
+  en: 'PhD in Geological Sciences',
+  pt: 'Doutora em Ciências Geológicas',
+  fr: 'Docteure en sciences géologiques',
+};
+
 export const team: TeamMember[] = [
+  { name: 'Lorena Cristina Previley', ...unsjResearcher, education: phdGeology },
+  { name: 'María Verónica Bastías Torres', ...unsjResearcher, education: phdGeology },
   {
-    name: 'TODO: Nombre del especialista',
-    role: { es: 'Geólogo/a consultor/a', en: 'Consulting geologist', pt: 'Geólogo(a) consultor(a)', fr: 'Géologue-conseil' },
-    specialty: {
-      es: 'Petrografía y exploración minera',
-      en: 'Petrography and mineral exploration',
-      pt: 'Petrografia e exploração mineral',
-      fr: 'Pétrographie et exploration minière',
+    name: 'Clara Oviedo',
+    ...unsjResearcher,
+    education: {
+      es: 'Lic. en Ciencias Geológicas',
+      en: 'BSc in Geological Sciences',
+      pt: 'Bacharel em Ciências Geológicas',
+      fr: 'Licence en sciences géologiques',
     },
-    education: { es: 'TODO: formación', en: 'TODO: education', pt: 'TODO: formação', fr: 'TODO: formation' },
   },
 ];
