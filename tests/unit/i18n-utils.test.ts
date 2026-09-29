@@ -53,13 +53,13 @@ describe('getLocalizedPath', () => {
 
 describe('getAlternates', () => {
   it('genera hreflang absolutos para los cuatro idiomas y x-default', () => {
-    const alternates = getAlternates('home', 'https://www.geocobre.cl');
+    const alternates = getAlternates('home', 'https://geocobre.pages.dev');
     expect(alternates).toEqual([
-      { hreflang: 'es', href: 'https://www.geocobre.cl/' },
-      { hreflang: 'en', href: 'https://www.geocobre.cl/en/' },
-      { hreflang: 'pt', href: 'https://www.geocobre.cl/pt/' },
-      { hreflang: 'fr', href: 'https://www.geocobre.cl/fr/' },
-      { hreflang: 'x-default', href: 'https://www.geocobre.cl/' },
+      { hreflang: 'es', href: 'https://geocobre.pages.dev/' },
+      { hreflang: 'en', href: 'https://geocobre.pages.dev/en/' },
+      { hreflang: 'pt', href: 'https://geocobre.pages.dev/pt/' },
+      { hreflang: 'fr', href: 'https://geocobre.pages.dev/fr/' },
+      { hreflang: 'x-default', href: 'https://geocobre.pages.dev/' },
     ]);
   });
 

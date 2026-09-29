@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // TODO(config): reemplazar por el dominio definitivo de GeoCobre.
-const SITE_URL = 'https://www.geocobre.cl';
+const SITE_URL = 'https://geocobre.pages.dev';
 
 export default defineConfig({
   site: SITE_URL,

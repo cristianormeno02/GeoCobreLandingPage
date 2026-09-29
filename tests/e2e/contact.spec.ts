@@ -133,9 +133,9 @@ test.describe('formulario de contacto', () => {
 
     const status = page.locator('#contacto [role="status"]');
     await expect(status).toContainText('No pudimos enviar tu mensaje');
-    await expect(status.getByRole('link', { name: /contacto@geocobre\.cl/ })).toHaveAttribute(
+    await expect(status.getByRole('link', { name: /contacto@geocobre\.ar/ })).toHaveAttribute(
       'href',
-      'mailto:contacto@geocobre.cl',
+      'mailto:contacto@geocobre.ar',
     );
     await expect(status.getByRole('link', { name: /WhatsApp/ })).toHaveAttribute('href', /^https:\/\/wa\.me\//);
     await expect(form.getByLabel('Nombre completo')).toHaveValue('Ana Pérez');
@@ -181,7 +181,7 @@ test.describe('formulario de contacto', () => {
     await expect(form).toHaveAttribute('method', /post/i);
     await expect(form.locator('input[type="hidden"][name="access_key"]')).toHaveCount(1);
     await expect(form.locator('input[type="hidden"][name="redirect"]')).toHaveValue(
-      'https://www.geocobre.cl/pt/obrigado/',
+      'https://geocobre.pages.dev/pt/obrigado/',
     );
     await expect(form.locator('input[type="hidden"][name="lang"]')).toHaveValue('pt');
   });
@@ -283,9 +283,9 @@ test.describe('pie de página', () => {
   test('muestra correo, WhatsApp, aviso de privacidad, idiomas y año', async ({ page }) => {
     await page.goto('/');
     const footer = page.getByRole('contentinfo');
-    await expect(footer.getByRole('link', { name: 'contacto@geocobre.cl' })).toHaveAttribute(
+    await expect(footer.getByRole('link', { name: 'contacto@geocobre.ar' })).toHaveAttribute(
       'href',
-      'mailto:contacto@geocobre.cl',
+      'mailto:contacto@geocobre.ar',
     );
     await expect(footer.getByRole('link', { name: /WhatsApp/ })).toHaveAttribute('href', /^https:\/\/wa\.me\//);
     await expect(footer.getByRole('link', { name: 'Aviso de privacidad' })).toHaveAttribute('href', '/privacidad/');
