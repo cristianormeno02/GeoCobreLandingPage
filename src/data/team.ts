@@ -7,6 +7,7 @@ export interface TeamMember {
   role: Localized;
   specialty: Localized;
   education: Localized;
+  linkedin?: string;
 }
 
 const unsjResearcher: Pick<TeamMember, 'role' | 'specialty'> = {
@@ -32,8 +33,18 @@ const phdGeology: Localized = {
 };
 
 export const team: TeamMember[] = [
-  { name: 'Lorena Cristina Previley', ...unsjResearcher, education: phdGeology },
-  { name: 'María Verónica Bastías Torres', ...unsjResearcher, education: phdGeology },
+  {
+    name: 'Lorena Cristina Previley',
+    ...unsjResearcher,
+    education: phdGeology,
+    linkedin: 'https://www.linkedin.com/in/lorena-previley-0b226714/',
+  },
+  {
+    name: 'María Verónica Bastías Torres',
+    ...unsjResearcher,
+    education: phdGeology,
+    linkedin: 'https://www.linkedin.com/in/mar%C3%ADa-ver%C3%B3nica-bast%C3%ADas-torres-4b618bb1/',
+  },
   {
     name: 'Clara Oviedo',
     ...unsjResearcher,
@@ -43,5 +54,6 @@ export const team: TeamMember[] = [
       pt: 'Bacharel em Ciências Geológicas',
       fr: 'Licence en sciences géologiques',
     },
+    linkedin: 'https://www.linkedin.com/in/clara-oviedo-8a8522227/',
   },
 ];

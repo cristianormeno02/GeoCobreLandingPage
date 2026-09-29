@@ -66,6 +66,10 @@ test.describe('equipo', () => {
       await expect(card.getByRole('heading', { level: 3 })).not.toBeEmpty();
       await expect(card.locator('[data-role]')).not.toBeEmpty();
       await expect(card.locator('[data-specialty]')).not.toBeEmpty();
+      const linkedin = card.getByRole('link', { name: /^Perfil de LinkedIn de .+/ });
+      await expect(linkedin).toHaveAttribute('href', /^https:\/\/www\.linkedin\.com\/in\/.+/);
+      await expect(linkedin).toHaveAttribute('target', '_blank');
+      await expect(linkedin).toHaveAttribute('rel', /noopener/);
     }
     for (const img of await page.locator('#equipo img').all()) {
       await expect(img).toHaveAttribute('alt', /^Fotografía de .+/);

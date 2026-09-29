@@ -127,6 +127,7 @@ export const pt: Dictionary = {
     title: 'Equipe',
     intro: 'Profissionais de geologia com experiência em exploração mineral e pesquisa aplicada.',
     photoAlt: 'Foto de',
+    linkedinLabel: 'Perfil no LinkedIn de',
   },
   training: {
     title: 'Capacitação',

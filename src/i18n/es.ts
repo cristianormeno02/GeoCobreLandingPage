@@ -125,6 +125,7 @@ export const es = {
     title: 'Equipo',
     intro: 'Profesionales de la geología con experiencia en exploración minera e investigación aplicada.',
     photoAlt: 'Fotografía de',
+    linkedinLabel: 'Perfil de LinkedIn de',
   },
   training: {
     title: 'Capacitación',
