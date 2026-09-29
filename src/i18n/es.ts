@@ -15,6 +15,7 @@ export const es = {
       methodology: 'Metodología',
       services: 'Servicios',
       validation: 'Validación',
+      clients: 'Clientes',
       team: 'Equipo',
       training: 'Capacitación',
       alliances: 'Alianzas',
@@ -120,6 +121,13 @@ export const es = {
       'Sistema completo y calificado',
       'Sistema probado en entorno operativo',
     ],
+  },
+  clients: {
+    title: 'Clientes',
+    intro: 'Empresas mineras que ya confiaron en nuestra asesoría para sus proyectos de exploración.',
+    project: 'Proyecto {project}',
+    logoAlt: 'Logo de {name}',
+    websiteLabel: 'Sitio web de {name}',
   },
   team: {
     title: 'Equipo',

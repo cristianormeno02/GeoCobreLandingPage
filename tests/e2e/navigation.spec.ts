@@ -4,6 +4,7 @@ const SECTIONS = [
   ['Metodología', 'metodologia'],
   ['Servicios', 'servicios'],
   ['Validación', 'validacion'],
+  ['Clientes', 'clientes'],
   ['Equipo', 'equipo'],
   ['Capacitación', 'capacitacion'],
   ['Alianzas', 'alianzas'],

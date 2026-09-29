@@ -1,7 +1,9 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { beforeAll, describe, expect, it } from 'vitest';
 import Alliances from '../../src/components/Alliances.astro';
+import Clients from '../../src/components/Clients.astro';
 import Training from '../../src/components/Training.astro';
+import type { Client } from '../../src/data/clients';
 import type { Course } from '../../src/data/courses';
 import type { Partner } from '../../src/data/partners';
 
@@ -56,5 +58,24 @@ describe('Alliances', () => {
     const html = await container.renderToString(Alliances, { props: { lang: 'es', partners: [] } });
     expect(html).not.toContain('Organizaciones aliadas');
     expect(html).not.toContain('<img');
+  });
+});
+
+describe('Clients', () => {
+  const client: Client = {
+    name: 'Minera Ejemplo',
+    logo: { src: '/logo-minera.png', width: 200, height: 80, format: 'png' },
+    url: 'https://example.org',
+    project: 'Cerro Ejemplo',
+    location: { es: 'Provincia de Salta', en: 'Salta Province', pt: 'Província de Salta', fr: 'Province de Salta' },
+  };
+
+  it('muestra logo, proyecto, ubicación y enlace del cliente en el idioma activo', async () => {
+    const html = await container.renderToString(Clients, { props: { lang: 'en', clients: [client] } });
+    expect(html.match(/<article/g)).toHaveLength(1);
+    expect(html).toMatch(/<img[^>]+alt="Minera Ejemplo logo"/);
+    expect(html).toContain('Cerro Ejemplo project');
+    expect(html).toContain('Salta Province');
+    expect(html).toMatch(/<a[^>]+href="https:\/\/example\.org"[^>]+aria-label="Minera Ejemplo website"/);
   });
 });

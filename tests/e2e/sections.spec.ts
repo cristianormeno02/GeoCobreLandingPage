@@ -58,6 +58,28 @@ test.describe('validación', () => {
   });
 });
 
+test.describe('clientes', () => {
+  test('muestra cada cliente con logo, proyecto, provincia y enlace a su sitio', async ({ page }) => {
+    const section = page.locator('#clientes');
+    await expect(section.getByRole('heading', { level: 2 })).toHaveText('Clientes');
+    const cards = section.getByRole('article');
+    await expect(cards).toHaveCount(2);
+    for (const [name, project, province, url] of [
+      ['Orvana Minerals Corp.', 'Proyecto Taguas', 'San Juan', 'https://www.orvana.com/'],
+      ['PSJ Cobre Mendocino', 'Proyecto San Jorge', 'Mendoza', 'https://psjcobremendocino.com/'],
+    ]) {
+      const card = cards.filter({ has: page.getByRole('heading', { level: 3, name }) });
+      await expect(card.getByRole('img', { name: `Logo de ${name}` })).toBeVisible();
+      await expect(card).toContainText(project);
+      await expect(card).toContainText(province);
+      const link = card.getByRole('link', { name: `Sitio web de ${name}` });
+      await expect(link).toHaveAttribute('href', new RegExp(`^${url}`));
+      await expect(link).toHaveAttribute('target', '_blank');
+      await expect(link).toHaveAttribute('rel', /noopener/);
+    }
+  });
+});
+
 test.describe('equipo', () => {
   test('muestra una tarjeta por especialista con nombre, rol y especialidad', async ({ page }) => {
     const cards = page.locator('#equipo').getByRole('article');

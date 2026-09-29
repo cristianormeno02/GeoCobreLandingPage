@@ -5,6 +5,7 @@ export const SECTIONS = [
   { id: 'metodologia', key: 'methodology' },
   { id: 'servicios', key: 'services' },
   { id: 'validacion', key: 'validation' },
+  { id: 'clientes', key: 'clients' },
   { id: 'equipo', key: 'team' },
   { id: 'capacitacion', key: 'training' },
   { id: 'alianzas', key: 'alliances' },

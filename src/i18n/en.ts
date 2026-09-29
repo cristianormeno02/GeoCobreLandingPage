@@ -17,6 +17,7 @@ export const en: Dictionary = {
       methodology: 'Methodology',
       services: 'Services',
       validation: 'Validation',
+      clients: 'Clients',
       team: 'Team',
       training: 'Training',
       alliances: 'Partnerships',
@@ -122,6 +123,13 @@ export const en: Dictionary = {
       'System complete and qualified',
       'System proven in operational environment',
     ],
+  },
+  clients: {
+    title: 'Clients',
+    intro: 'Mining companies that have already trusted our advisory services for their exploration projects.',
+    project: '{project} project',
+    logoAlt: '{name} logo',
+    websiteLabel: '{name} website',
   },
   team: {
     title: 'Team',

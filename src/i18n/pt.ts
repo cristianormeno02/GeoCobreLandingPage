@@ -17,6 +17,7 @@ export const pt: Dictionary = {
       methodology: 'Metodologia',
       services: 'Serviços',
       validation: 'Validação',
+      clients: 'Clientes',
       team: 'Equipe',
       training: 'Capacitação',
       alliances: 'Parcerias',
@@ -122,6 +123,13 @@ export const pt: Dictionary = {
       'Sistema completo e qualificado',
       'Sistema comprovado em ambiente operacional',
     ],
+  },
+  clients: {
+    title: 'Clientes',
+    intro: 'Empresas de mineração que já confiaram em nossa assessoria para seus projetos de exploração.',
+    project: 'Projeto {project}',
+    logoAlt: 'Logotipo de {name}',
+    websiteLabel: 'Site de {name}',
   },
   team: {
     title: 'Equipe',

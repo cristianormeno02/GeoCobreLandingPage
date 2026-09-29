@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import { type Client, clients as defaultClients } from '../data/clients';
+import { type Locale, t } from '../i18n/utils';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  lang: Locale;
+  clients?: Client[];
+}
+
+const { lang, clients = defaultClients } = Astro.props;
+const dict = t(lang).clients;
+---
+
+<section id="clientes" class="bg-mineral-50">
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-24">
+    <SectionHeader title={dict.title} intro={dict.intro} />
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {
+        clients.map((client) => (
+          <article class="flex flex-col rounded-xl border border-quartz-200 bg-white p-6 md:p-8">
+            <div class="flex h-20 items-center">
+              <Image
+                src={client.logo}
+                alt={dict.logoAlt.replace('{name}', client.name)}
+                height={80}
+                class="h-full w-auto max-w-full object-contain"
+              />
+            </div>
+            <h3 class="mt-6 text-lg font-semibold text-slate-950">{client.name}</h3>
+            <p class="font-medium text-copper-700">{dict.project.replace('{project}', client.project)}</p>
+            <p class="mt-1 text-slate-600">{client.location[lang]}</p>
+            <a
+              href={client.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={dict.websiteLabel.replace('{name}', client.name)}
+              class="mt-4 inline-flex min-h-11 items-center gap-2 self-start text-sm font-medium text-copper-700 hover:underline"
+            >
+              {new URL(client.url).hostname.replace(/^www\./, '')}
+              <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+              </svg>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
