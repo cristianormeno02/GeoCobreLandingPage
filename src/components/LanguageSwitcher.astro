@@ -1,4 +1,5 @@
 ---
+import Flag from './Flag.astro';
 import { LANGUAGE_NAMES, LOCALES, type Locale, type RouteKey, getLocalizedPath, t } from '../i18n/utils';
 
 interface Props {
@@ -25,7 +26,7 @@ const { lang, route, class: className, inverted = false } = Astro.props;
               aria-current={current ? 'page' : undefined}
               title={LANGUAGE_NAMES[locale]}
               class:list={[
-                'inline-flex min-h-11 min-w-11 items-center justify-center rounded-md px-2 text-sm font-semibold uppercase',
+                'inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-md px-2 text-sm font-semibold uppercase',
                 current
                   ? inverted
                     ? 'bg-copper-400 text-slate-950'
@@ -35,6 +36,7 @@ const { lang, route, class: className, inverted = false } = Astro.props;
                     : 'text-slate-700 hover:bg-mineral-50 hover:text-copper-700',
               ]}
             >
+              <Flag locale={locale} />
               <span aria-hidden="true">{locale}</span>
               <span class="sr-only">{LANGUAGE_NAMES[locale]}</span>
             </a>

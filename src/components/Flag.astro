@@ -1,0 +1,56 @@
+---
+import type { Locale } from '../i18n/utils';
+
+// Bandera representativa de cada idioma (decisión de negocio: región del cliente).
+interface Props {
+  locale: Locale;
+  class?: string;
+}
+
+const { locale, class: className } = Astro.props;
+const usStripes = Array.from({ length: 6 }, (_, i) => (2 * i + 1) * (15 / 13));
+---
+
+<svg
+  class:list={['h-[15px] w-5 shrink-0 overflow-hidden rounded-[2px] ring-1 ring-black/10', className]}
+  viewBox="0 0 20 15"
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    locale === 'es' && (
+      <>
+        <rect width="20" height="15" fill="#74acdf" />
+        <rect y="5" width="20" height="5" fill="#fff" />
+        <circle cx="10" cy="7.5" r="1.7" fill="#f6b40e" />
+      </>
+    )
+  }
+  {
+    locale === 'en' && (
+      <>
+        <rect width="20" height="15" fill="#b22234" />
+        {usStripes.map((y) => <rect y={y} width="20" height={15 / 13} fill="#fff" />)}
+        <rect width="8.5" height={(15 / 13) * 7} fill="#3c3b6e" />
+      </>
+    )
+  }
+  {
+    locale === 'pt' && (
+      <>
+        <rect width="20" height="15" fill="#009c3b" />
+        <path d="M1.8 7.5 10 1.6l8.2 5.9L10 13.4z" fill="#ffdf00" />
+        <circle cx="10" cy="7.5" r="3.4" fill="#002776" />
+      </>
+    )
+  }
+  {
+    locale === 'fr' && (
+      <>
+        <rect width="20" height="15" fill="#fff" />
+        <rect width="6.67" height="15" fill="#0055a4" />
+        <rect x="13.33" width="6.67" height="15" fill="#ef4135" />
+      </>
+    )
+  }
+</svg>
